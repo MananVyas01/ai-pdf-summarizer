@@ -261,8 +261,14 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### 🤖 AI Model Selection")
 model_choice = st.sidebar.selectbox(
     "Choose Summarization Model:",
-    ["t5-small", "facebook/bart-large-cnn"],
-    help="T5-small is faster, BART-large-cnn provides better quality"
+    [
+        "t5-small",
+        "facebook/bart-large-cnn",
+        "google/pegasus-xsum",
+        "philschmid/bart-large-cnn-samsum",
+        "sshleifer/distilbart-cnn-12-6"
+    ],
+    help="T5-small is faster, BART and Pegasus provide higher quality, DistilBART is a lightweight option"
 )
 st.sidebar.markdown("---")
 
