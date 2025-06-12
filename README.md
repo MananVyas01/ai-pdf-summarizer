@@ -93,6 +93,7 @@ You can use the app directly in your browser—no installation required!
 ```
 ai-pdf-summarizer/
 ├── app.py                 # Main Streamlit application
+├── api.py                 # api manager to user their model for faster perfromance
 ├── requirements.txt       # Project dependencies
 ├── .gitignore            # Git ignore rules
 ├── README.md             # Project documentation
