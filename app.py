@@ -657,9 +657,9 @@ Advanced Chunked Summarization with Detail Preservation
                             
                             st.caption("💡 This comprehensive summary covers the entire document, not just the first 1000 characters.")
                         
-                    except Exception as e:
-                        st.error(f"❌ Error generating summary: {str(e)}")
-                        st.info("Please try again or try with a different model. For very large documents, processing may take longer.")
+                except Exception as e:
+                    st.error(f"❌ Error generating summary: {str(e)}")
+                    st.info("Please try again or try with a different model. For very large documents, processing may take longer.")
             
         else:
             st.error("❌ No text could be extracted from this PDF using either direct extraction or OCR.")
