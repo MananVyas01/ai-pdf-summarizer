@@ -74,6 +74,7 @@ A powerful web application that extracts text from PDF documents and generates A
 
 ## 🖼️ Screenshot
 
+
 ![App Screenshot](ScreenShot.png)
 
 
@@ -158,8 +159,11 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 🙏 Acknowledgments
 
 - [Streamlit](https://streamlit.io/) for the amazing web app framework
-- [Hugging Face](https://huggingface.co/) for providing the T5 model and transformers library
+- [Hugging Face](https://huggingface.co/) for providing a wide range of summarization models and the transformers library
 - [PyMuPDF](https://pymupdf.readthedocs.io/) for robust PDF processing capabilities
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) for image-based text extraction
+- [pdf2image](https://github.com/Belval/pdf2image) and [Poppler](https://poppler.freedesktop.org/) for PDF to image conversion
+- Model creators: Google (Pegasus), Facebook/Meta (BART), Hugging Face (T5, DistilBART), and the open-source community for their contributions to NLP research
 
 ---
 
