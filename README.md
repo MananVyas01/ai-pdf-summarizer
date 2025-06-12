@@ -7,7 +7,7 @@ A powerful web application that extracts text from PDF documents and generates A
 - 📤 **Upload PDF documents** - Support for both text-based and scanned PDF files
 - 🔍 **Smart text extraction** - Direct extraction for text-based PDFs
 - 🔍 **OCR fallback support** - Automatic OCR for scanned/image-based PDFs
-- 🧠 **Summarize using Hugging Face `t5-small` model** - Advanced AI summarization
+- 🧠 **Summarize using Hugging Face models** - Choose from T5, BART, Pegasus, DistilBART, and more
 - 📌 **Summary displayed as clean bullet points** - Easy-to-read format
 - 📥 **Download the summary as a `.txt` file** - Save for future reference
 - 🖼️ **Polished UI with emoji icons and clear sectioning** - Modern, user-friendly interface
@@ -98,12 +98,17 @@ ai-pdf-summarizer/
 
 ## 🤖 AI Model Information
 
-This project uses the **T5-Small** model from Hugging Face:
-- **Model**: `t5-small`
+This project supports a wide range of Hugging Face summarization models:
+
+- **T5 Family**: `t5-small`, `t5-base`, `t5-large`
+- **BART Family**: `facebook/bart-large-cnn`, `sshleifer/distilbart-cnn-12-6`, `philschmid/bart-large-cnn-samsum`
+- **Pegasus Family**: `google/pegasus-xsum`, `google/pegasus-cnn_dailymail`, `google/pegasus-multi_news`, `google/pegasus-pubmed`, `google/pegasus-arxiv`
+
+**Model selection is available in the sidebar.**
+
 - **Task**: Text-to-text generation (summarization)
-- **Parameters**: ~60M parameters
-- **Performance**: Optimized for speed and efficiency
-- **Caching**: Model is cached using Streamlit's `@st.cache_resource` for faster subsequent runs
+- **Performance**: T5 is fast and efficient, BART and Pegasus provide higher quality for news and scientific text
+- **Caching**: Models are cached using Streamlit's `@st.cache_resource` for faster subsequent runs
 
 ## 📋 Supported File Formats
 

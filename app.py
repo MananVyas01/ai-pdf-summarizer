@@ -274,7 +274,7 @@ model_choice = st.sidebar.selectbox(
         "google/pegasus-pubmed",
         "google/pegasus-arxiv"
     ],
-    help="Choose from a wide range of state-of-the-art summarization models. T5 is fast, BART and Pegasus provide high quality, DistilBART is lightweight."
+    help="Choose from a variety of top summarization models from Hugging Face. T5 and BART are general-purpose, Pegasus is state-of-the-art for news and scientific text."
 )
 st.sidebar.markdown("---")
 
