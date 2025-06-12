@@ -144,6 +144,36 @@ This project was developed in multiple stages:
 - **Stage 7**: Documentation and README
 - **Stage 8**: OCR fallback support for scanned PDFs
 
+## 🛠️ API Usage
+
+You can use the REST API to summarize PDFs programmatically.
+
+### Endpoint
+
+`POST /summarize`
+
+### Parameters
+- `file`: PDF file (form-data)
+- `model_name`: (optional) Summarization model (default: t5-small)
+- `max_length`: (optional) Max summary length (default: 150)
+- `min_length`: (optional) Min summary length (default: 40)
+
+### Example (using curl)
+```bash
+curl -X POST "http://localhost:8000/summarize" \
+  -F "file=@yourfile.pdf" \
+  -F "model_name=t5-small" \
+  -F "max_length=150" \
+  -F "min_length=40"
+```
+
+### Response
+```json
+{
+  "summary": "..."
+}
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.

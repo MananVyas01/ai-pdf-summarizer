@@ -5,3 +5,5 @@ torch>=2.0.0
 pytesseract>=0.3.10
 pdf2image>=1.16.0
 Pillow>=9.0.0
+fastapi
+uvicorn

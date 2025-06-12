@@ -291,6 +291,21 @@ if model_choice in large_models:
         "If the app crashes or restarts, try a smaller model like 't5-small' or 'distilbart-cnn-12-6'."
     )
 
+# Summarization mode selection
+st.sidebar.markdown("### 🛠️ Summarization Mode")
+summarization_mode = st.sidebar.radio(
+    "Choose how to summarize:",
+    ["Built-in (local)", "External API"],
+    help="Use the app's built-in summarizer or send your PDF to a public summarization API."
+)
+external_api_url = None
+if summarization_mode == "External API":
+    external_api_url = st.sidebar.text_input(
+        "External API Endpoint:",
+        value="https://ai-pdf-summarize.streamlit.app/summarize",
+        help="Enter the public API endpoint for summarization. Must accept a PDF file and return a summary."
+    )
+
 st.sidebar.markdown("---")
 
 st.sidebar.markdown("### 📋 Enhanced Features")
@@ -453,16 +468,33 @@ if uploaded_file is not None:
                 st.info(detail_info[summary_detail])
                 
                 # Summarize button
-                if st.button("🧠 Generate Comprehensive Summary", type="primary", use_container_width=True):
-                    try:
-                        # Show loading spinner with progress
-                        with st.spinner("🔄 Generating comprehensive AI summary... This may take a moment for large documents."):
-                            # Load the summarizer model with selected model
-                            summarizer = load_summarizer(model_choice)
-                            
-                            # Progress bar
-                            progress_bar = st.progress(0)
-                            status_text = st.empty()
+                if summarization_mode == "External API" and external_api_url:
+                    if st.button("🌐 Generate Summary via External API", type="primary", use_container_width=True):
+                        import requests
+                        try:
+                            with st.spinner("Sending PDF to external API for summarization..."):
+                                files = {"file": (uploaded_file.name, uploaded_file, "application/pdf")}
+                                data = {"model_name": model_choice, "max_length": 150, "min_length": 40}
+                                response = requests.post(external_api_url, files=files, data=data, timeout=60)
+                                if response.status_code == 200:
+                                    summary = response.json().get("summary", "No summary returned.")
+                                    st.success("Summary from external API:")
+                                    st.write(summary)
+                                else:
+                                    st.error(f"API Error: {response.status_code} {response.text}")
+                        except Exception as e:
+                            st.error(f"Failed to connect to external API: {str(e)}")
+                else:
+                    if st.button("🧠 Generate Comprehensive Summary", type="primary", use_container_width=True):
+                        try:
+                            # Show loading spinner with progress
+                            with st.spinner("🔄 Generating comprehensive AI summary... This may take a moment for large documents."):
+                                # Load the summarizer model with selected model
+                                summarizer = load_summarizer(model_choice)
+                                
+                                # Progress bar
+                                progress_bar = st.progress(0)
+                                status_text = st.empty()
                               # Update progress: Starting
                             progress_bar.progress(10)
                             status_text.text("📝 Analyzing document structure...")
