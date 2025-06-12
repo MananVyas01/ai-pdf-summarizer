@@ -59,10 +59,10 @@ if uploaded_file is not None:
     try:
         # Read the PDF file
         pdf_bytes = uploaded_file.read()
-        
-        # Open PDF with PyMuPDF
+          # Open PDF with PyMuPDF
         pdf_document = fitz.open(stream=pdf_bytes, filetype="pdf")
-          # Extract text from all pages
+        
+        # Extract text from all pages
         full_text = ""
         for page_num in range(pdf_document.page_count):
             page = pdf_document.get_page(page_num)
@@ -155,9 +155,9 @@ if uploaded_file is not None:
                                     </div>
                                 </div>
                                 """, 
-                                unsafe_allow_html=True
-                            )
-                              # Add success indicator
+                                unsafe_allow_html=True                            )
+                            
+                            # Add success indicator
                             st.success("✅ Summary generated successfully!")
                             
                             # Download section

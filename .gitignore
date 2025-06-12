@@ -1,0 +1,70 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+.env/
+venv/
+env/
+ENV/
+
+# IDE configuration files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+.Trashes
+
+# Streamlit specific
+.streamlit/
+
+# Model cache (Hugging Face transformers)
+.cache/
+transformers_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+
+# PDF test files (optional - uncomment if you don't want to commit test PDFs)
+# *.pdf
