@@ -42,10 +42,10 @@ if uploaded_file is not None:
         for page_num in range(pdf_document.page_count):
             page = pdf_document.get_page(page_num)
             full_text += page.get_text()
-        
-        # Close the PDF document
+          # Close the PDF document
         pdf_document.close()
-          # Check if text was extracted
+        
+        # Check if text was extracted
         if full_text.strip():
             # Add spacing before preview section
             st.markdown("<br><br>", unsafe_allow_html=True)
@@ -97,10 +97,42 @@ if uploaded_file is not None:
                         # Generate summary
                         summary = summarizer(text_to_summarize, max_length=150, min_length=50, do_sample=False)
                         summary_text = summary[0]['summary_text']
-                    
-                    # Display the summary result
-                    st.markdown("### ✅ Summary Result")
-                    st.success(f"📝 **Generated Summary:**\n\n{summary_text}")
+                      # Display the summary result with enhanced formatting
+                    with st.container():
+                        # Add divider for visual separation
+                        st.markdown("---")
+                        
+                        # Header for summary section
+                        st.markdown("### 📝 Key Summary Points")
+                        
+                        # Convert summary to bullet points
+                        summary_points = summary_text.split('. ')
+                        
+                        # Create styled container for bullet points
+                        bullet_points_html = ""
+                        for point in summary_points:
+                            point = point.strip()
+                            # Skip very short or meaningless lines (under 3 words)
+                            if len(point.split()) >= 3:
+                                # Remove trailing period if it exists
+                                if point.endswith('.'):
+                                    point = point[:-1]
+                                bullet_points_html += f"• {point}<br>"
+                        
+                        # Display bullet points in styled container
+                        st.markdown(
+                            f"""
+                            <div style="background-color:#f0f2f6; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                                <div style="color: #333; line-height: 1.6;">
+                                    {bullet_points_html}
+                                </div>
+                            </div>
+                            """, 
+                            unsafe_allow_html=True
+                        )
+                        
+                        # Add success indicator
+                        st.success("✅ Summary generated successfully!")
                     
                 except Exception as e:
                     st.error(f"❌ Error generating summary: {str(e)}")
@@ -116,10 +148,10 @@ if uploaded_file is not None:
         st.error(f"❌ Error processing PDF: {str(e)}")
         st.info("Please make sure you've uploaded a valid PDF file.")
 
-else:
-    # Show instructions when no file is uploaded
+else:    # Show instructions when no file is uploaded
     st.info("👆 Please upload a PDF file to get started!")
-      # Add some helpful information
+    
+    # Add some helpful information
     st.markdown("---")
     st.markdown("### ℹ️ How to use:")
     st.markdown("""
