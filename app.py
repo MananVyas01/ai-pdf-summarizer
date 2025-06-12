@@ -447,11 +447,11 @@ if uploaded_file is not None:
                             # Generate chunked summary with dynamic chunk sizing
                             # Smaller chunks for more detailed summaries
                             if summary_detail == "Brief":
-                                chunk_size = 1200  # Larger chunks, fewer summaries
+                                chunk_size = 2000  # Larger chunks, fewer summaries
                             elif summary_detail == "Detailed":
-                                chunk_size = 900   # Medium chunks, balanced
+                                chunk_size = 1500   # Medium chunks, balanced
                             else:  # Comprehensive
-                                chunk_size = 700   # Smaller chunks, more detailed coverage
+                                chunk_size = 1000   # Smaller chunks, more detailed coverage
                             
                             progress_bar.progress(30)
                             status_text.text("🧩 Breaking document into optimal chunks...")
