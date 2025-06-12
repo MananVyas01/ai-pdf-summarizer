@@ -263,12 +263,18 @@ model_choice = st.sidebar.selectbox(
     "Choose Summarization Model:",
     [
         "t5-small",
+        "t5-base",
+        "t5-large",
         "facebook/bart-large-cnn",
+        "sshleifer/distilbart-cnn-12-6",
         "google/pegasus-xsum",
         "philschmid/bart-large-cnn-samsum",
-        "sshleifer/distilbart-cnn-12-6"
+        "google/pegasus-cnn_dailymail",
+        "google/pegasus-multi_news",
+        "google/pegasus-pubmed",
+        "google/pegasus-arxiv"
     ],
-    help="T5-small is faster, BART and Pegasus provide higher quality, DistilBART is a lightweight option"
+    help="Choose from a wide range of state-of-the-art summarization models. T5 is fast, BART and Pegasus provide high quality, DistilBART is lightweight."
 )
 st.sidebar.markdown("---")
 
