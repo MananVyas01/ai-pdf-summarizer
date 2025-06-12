@@ -70,7 +70,9 @@ A powerful web application that extracts text from PDF documents and generates A
 
 ## 🌐 Live Demo
 
-🚧 Coming soon! Stay tuned for a hosted version on Streamlit Cloud or Hugging Face Spaces.
+[🚀 Try the AI PDF Summarizer Live!](https://ai-pdf-summarize.streamlit.app/)
+
+You can use the app directly in your browser—no installation required!
 
 ## 🖼️ Screenshot
 
