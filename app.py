@@ -60,13 +60,14 @@ if uploaded_file is not None:
         # Read the PDF file
         pdf_bytes = uploaded_file.read()
           # Open PDF with PyMuPDF
-        pdf_document = fitz.open(stream=pdf_bytes, filetype="pdf")
-        
-        # Extract text from all pages
+        pdf_document = fitz.open(stream=pdf_bytes, filetype="pdf")        # Extract text from all pages
         full_text = ""
         for page_num in range(pdf_document.page_count):
-            page = pdf_document.get_page(page_num)
+            page = pdf_document[page_num]  # Updated API method
             full_text += page.get_text()
+        
+        # Store page count before closing document
+        total_pages = pdf_document.page_count
         
         # Close the PDF document
         pdf_document.close()
@@ -89,14 +90,13 @@ if uploaded_file is not None:
                     height=300,
                     disabled=True
                 )
-                
-                # Show document statistics
+                  # Show document statistics
                 st.markdown("---")
                 st.markdown("### 📊 Document Statistics")
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    st.metric("**Total Pages**", pdf_document.page_count)
+                    st.metric("**Total Pages**", total_pages)
                 
                 with col2:
                     st.metric("**Total Characters**", len(full_text))
