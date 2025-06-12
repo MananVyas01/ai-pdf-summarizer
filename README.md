@@ -74,7 +74,7 @@ A powerful web application that extracts text from PDF documents and generates A
 
 ## 🖼️ Screenshot
 
-![App Screenshot](screenshot.png)
+![App Screenshot](ScreenShot.png)
 
 
 
