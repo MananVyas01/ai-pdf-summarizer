@@ -68,3 +68,5 @@ logs/
 
 # PDF test files (optional - uncomment if you don't want to commit test PDFs)
 # *.pdf
+
+nul
