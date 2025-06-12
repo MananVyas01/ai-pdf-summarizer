@@ -4,8 +4,9 @@ A powerful web application that extracts text from PDF documents and generates A
 
 ## ✨ Features
 
-- 📤 **Upload PDF documents** - Support for text-based PDF files
-- 🔍 **View extracted text preview** (first 1000 characters)
+- 📤 **Upload PDF documents** - Support for both text-based and scanned PDF files
+- 🔍 **Smart text extraction** - Direct extraction for text-based PDFs
+- 🔍 **OCR fallback support** - Automatic OCR for scanned/image-based PDFs
 - 🧠 **Summarize using Hugging Face `t5-small` model** - Advanced AI summarization
 - 📌 **Summary displayed as clean bullet points** - Easy-to-read format
 - 📥 **Download the summary as a `.txt` file** - Save for future reference
@@ -13,6 +14,7 @@ A powerful web application that extracts text from PDF documents and generates A
 - 📊 **Document statistics** - View page count, word count, and character count
 - 🎯 **Expandable sections** - Organized workflow with collapsible panels
 - 🔄 **Real-time processing** - Instant text extraction and summarization
+- ⚡ **Automatic detection** - Intelligently chooses best extraction method
 
 ## 🛠️ Tech Stack
 
@@ -21,6 +23,8 @@ A powerful web application that extracts text from PDF documents and generates A
 - [Hugging Face Transformers](https://huggingface.co/docs/transformers/index) – AI summarization models
 - [Torch](https://pytorch.org/) – Backend for transformer models
 - [Python](https://python.org/) – Core programming language
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) – Optical character recognition for scanned PDFs
+- [pdf2image](https://github.com/Belval/pdf2image) – PDF to image conversion for OCR processing
 
 ## 🚀 Setup Instructions
 
@@ -41,12 +45,28 @@ A powerful web application that extracts text from PDF documents and generates A
    pip install -r requirements.txt
    ```
 
-4. **Run the app:**
+4. **Install Tesseract OCR (for scanned PDF support):**
+   
+   **Windows:**
+   - Download from [GitHub Releases](https://github.com/tesseract-ocr/tesseract/releases)
+   - Add to PATH environment variable
+   
+   **Linux:**
+   ```bash
+   sudo apt-get install tesseract-ocr poppler-utils
+   ```
+   
+   **macOS:**
+   ```bash
+   brew install tesseract poppler
+   ```
+
+5. **Run the app:**
    ```bash
    streamlit run app.py
    ```
 
-5. **Open your browser** and navigate to `http://localhost:8501`
+6. **Open your browser** and navigate to `http://localhost:8501`
 
 ## 🌐 Live Demo
 
@@ -56,7 +76,7 @@ A powerful web application that extracts text from PDF documents and generates A
 
 ![App Screenshot](screenshot.png)
 
-> Replace this placeholder with a real screenshot after UI setup.
+
 
 ## 📚 How to Use
 
@@ -89,13 +109,17 @@ This project uses the **T5-Small** model from Hugging Face:
 
 - ✅ **PDF files (.pdf)** - Primary format
 - ✅ **Text-based PDFs** - Work best for extraction
-- ❌ **Scanned PDFs** - May not extract text properly
+- ✅ **Scanned PDFs** - OCR extraction available
+- ✅ **Image-based PDFs** - Automatic OCR fallback
 - ❌ **Password-protected PDFs** - Not currently supported
 
 ## 💡 Tips for Best Results
 
-- Ensure your PDF contains selectable text (not just images)
-- Smaller documents (under 50 pages) process faster
+- **Text-based PDFs**: Fastest processing with highest accuracy
+- **Scanned PDFs**: OCR will activate automatically (may take longer)
+- **Image quality**: Higher resolution scans produce better OCR results
+- **Document size**: Smaller documents process faster
+- **Mixed PDFs**: App automatically detects and uses best extraction method
 - The AI summarizes the first 1000 characters for optimal performance
 - Complex technical documents may require manual review of summaries
 
@@ -110,6 +134,7 @@ This project was developed in multiple stages:
 - **Stage 5**: Summary download feature
 - **Stage 6**: Requirements and deployment setup
 - **Stage 7**: Documentation and README
+- **Stage 8**: OCR fallback support for scanned PDFs
 
 ## 🤝 Contributing
 
