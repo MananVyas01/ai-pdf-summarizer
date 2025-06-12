@@ -530,80 +530,81 @@ if uploaded_file is not None:
                             # Clear progress indicators
                             progress_bar.empty()
                             status_text.empty()
-                        
-                        # Display the summary result with enhanced formatting
-                        with st.container():
-                            # Add divider for visual separation
-                            st.markdown("---")
                             
-                            # Header for summary section
-                            st.markdown("### 📝 Comprehensive Summary Results")
-                              # Summary statistics
-                            col1, col2, col3 = st.columns(3)
-                            with col1:
-                                st.metric("📊 Summary Points", len(bullet_points))
-                            with col2:
-                                compression_ratio = len(full_text) // max(len(comprehensive_summary), 1)
-                                st.metric("🔄 Compression Ratio", f"{compression_ratio}:1")
-                            with col3:
-                                st.metric("🤖 Model Used", model_choice.split('/')[-1])
-                            
-                            # Additional metrics row
-                            col4, col5, col6 = st.columns(3)
-                            with col4:
-                                st.metric("📝 Summary Length", f"{len(comprehensive_summary)} chars")
-                            with col5:
-                                st.metric("📄 Original Length", f"{len(full_text)} chars")
-                            with col6:
-                                coverage_percent = min(100, (len(comprehensive_summary) / len(full_text)) * compression_ratio * 10)
-                                st.metric("📈 Content Coverage", f"{coverage_percent:.1f}%")
-                            
-                            st.markdown("---")
-                            
-                            # Display bullet points in styled container
-                            if bullet_points:
-                                bullet_points_html = ""
-                                for i, point in enumerate(bullet_points, 1):
-                                    bullet_points_html += f"<div style='margin-bottom: 8px;'><strong>{i}.</strong> {point}</div>"
+                            # Display the summary result with enhanced formatting
+                            with st.container():
+                                # Add divider for visual separation
+                                st.markdown("---")
                                 
-                                st.markdown(
-                                    f"""
-                                    <div style="background-color:#f0f2f6; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #4CAF50;">
-                                        <div style="color: #333; line-height: 1.8; font-size: 16px;">
-                                            {bullet_points_html}
+                                # Header for summary section
+                                st.markdown("### 📝 Comprehensive Summary Results")
+                                
+                                # Summary statistics
+                                col1, col2, col3 = st.columns(3)
+                                with col1:
+                                    st.metric("📊 Summary Points", len(bullet_points))
+                                with col2:
+                                    compression_ratio = len(full_text) // max(len(comprehensive_summary), 1)
+                                    st.metric("🔄 Compression Ratio", f"{compression_ratio}:1")
+                                with col3:
+                                    st.metric("🤖 Model Used", model_choice.split('/')[-1])
+                                
+                                # Additional metrics row
+                                col4, col5, col6 = st.columns(3)
+                                with col4:
+                                    st.metric("📝 Summary Length", f"{len(comprehensive_summary)} chars")
+                                with col5:
+                                    st.metric("📄 Original Length", f"{len(full_text)} chars")
+                                with col6:
+                                    coverage_percent = min(100, (len(comprehensive_summary) / len(full_text)) * compression_ratio * 10)
+                                    st.metric("📈 Content Coverage", f"{coverage_percent:.1f}%")
+                                
+                                st.markdown("---")
+                                
+                                # Display bullet points in styled container
+                                if bullet_points:
+                                    bullet_points_html = ""
+                                    for i, point in enumerate(bullet_points, 1):
+                                        bullet_points_html += f"<div style='margin-bottom: 8px;'><strong>{i}.</strong> {point}</div>"
+                                    
+                                    st.markdown(
+                                        f"""
+                                        <div style="background-color:#f0f2f6; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #4CAF50;">
+                                            <div style="color: #333; line-height: 1.8; font-size: 16px;">
+                                                {bullet_points_html}
+                                            </div>
                                         </div>
-                                    </div>
-                                    """, 
-                                    unsafe_allow_html=True
-                                )
-                            else:
-                                st.error("❌ Could not generate meaningful bullet points from the summary.")
-                                # Fallback: show raw summary
-                                st.text_area("Raw Summary:", comprehensive_summary, height=200)
-                            
-                            # Add success indicator
-                            st.success(f"✅ Comprehensive summary generated successfully! ({len(bullet_points)} key points extracted)")
-                            
-                            # Download section
-                            st.markdown("---")
-                            st.markdown("### 📥 Download Summary")
-                            
-                            # Optional: Allow users to customize filename
-                            col1, col2 = st.columns([2, 1])
-                            with col1:
-                                filename = st.text_input(
-                                    "Customize filename (optional):",
-                                    value="comprehensive_summary",
-                                    help="Enter filename without extension (.txt will be added automatically)"
-                                )
-                            
-                            with col2:
-                                st.markdown("<br>", unsafe_allow_html=True)  # Add spacing for alignment
-                                  # Create downloadable content - convert bullet points to plain text
-                                compression_ratio = len(full_text) // max(len(comprehensive_summary), 1)
-                                coverage_percent = min(100, (len(comprehensive_summary) / len(full_text)) * compression_ratio * 10)
+                                        """, 
+                                        unsafe_allow_html=True
+                                    )
+                                else:
+                                    st.error("❌ Could not generate meaningful bullet points from the summary.")
+                                    # Fallback: show raw summary
+                                    st.text_area("Raw Summary:", comprehensive_summary, height=200)
                                 
-                                download_content = f"""AI PDF Comprehensive Summary - Enhanced Analysis
+                                # Add success indicator
+                                st.success(f"✅ Comprehensive summary generated successfully! ({len(bullet_points)} key points extracted)")
+                                
+                                # Download section
+                                st.markdown("---")
+                                st.markdown("### 📥 Download Summary")
+                                
+                                # Optional: Allow users to customize filename
+                                col1, col2 = st.columns([2, 1])
+                                with col1:
+                                    filename = st.text_input(
+                                        "Customize filename (optional):",
+                                        value="comprehensive_summary",
+                                        help="Enter filename without extension (.txt will be added automatically)"
+                                    )
+                                
+                                with col2:
+                                    st.markdown("<br>", unsafe_allow_html=True)  # Add spacing for alignment
+                                    # Create downloadable content - convert bullet points to plain text
+                                    compression_ratio = len(full_text) // max(len(comprehensive_summary), 1)
+                                    coverage_percent = min(100, (len(comprehensive_summary) / len(full_text)) * compression_ratio * 10)
+                                    
+                                    download_content = f"""AI PDF Comprehensive Summary - Enhanced Analysis
 {'='*70}
 
 Generated on: {st.session_state.get('current_date', 'Today')}
@@ -628,13 +629,13 @@ Summary Statistics:
 COMPREHENSIVE SUMMARY:
 {'-'*50}
 """
-                                
-                                # Convert bullet points back to clean text for download
-                                for i, point in enumerate(bullet_points, 1):
-                                    download_content += f"{i}. {point}\n\n"
-                                
-                                # Add the full summary text as well
-                                download_content += f"""
+                                    
+                                    # Convert bullet points back to clean text for download
+                                    for i, point in enumerate(bullet_points, 1):
+                                        download_content += f"{i}. {point}\n\n"
+                                    
+                                    # Add the full summary text as well
+                                    download_content += f"""
 
 FULL SUMMARY TEXT:
 {'-'*50}
@@ -644,22 +645,21 @@ FULL SUMMARY TEXT:
 Generated by AI PDF Summarizer v3.0 - Stage 9 Enhanced
 Advanced Chunked Summarization with Detail Preservation
 """
+                                    
+                                    # Download button
+                                    st.download_button(
+                                        label="📥 Download Comprehensive Summary",
+                                        data=download_content,
+                                        file_name=f"{filename}.txt",
+                                        mime="text/plain",
+                                        type="secondary",
+                                        use_container_width=True
+                                    )
                                 
-                                # Download button
-                                st.download_button(
-                                    label="📥 Download Comprehensive Summary",
-                                    data=download_content,
-                                    file_name=f"{filename}.txt",
-                                    mime="text/plain",
-                                    type="secondary",
-                                    use_container_width=True
-                                )
-                            
-                            st.caption("💡 This comprehensive summary covers the entire document, not just the first 1000 characters.")
-                        
-                except Exception as e:
-                    st.error(f"❌ Error generating summary: {str(e)}")
-                    st.info("Please try again or try with a different model. For very large documents, processing may take longer.")
+                                st.caption("💡 This comprehensive summary covers the entire document, not just the first 1000 characters.")
+                        except Exception as e:
+                            st.error(f"❌ Error generating summary: {str(e)}")
+                            st.info("Please try again or try with a different model. For very large documents, processing may take longer.")
             
         else:
             st.error("❌ No text could be extracted from this PDF using either direct extraction or OCR.")
