@@ -276,6 +276,21 @@ model_choice = st.sidebar.selectbox(
     ],
     help="Choose from a variety of top summarization models from Hugging Face. T5 and BART are general-purpose, Pegasus is state-of-the-art for news and scientific text."
 )
+
+# Warn users if a large model is selected (may crash on limited hardware)
+large_models = [
+    "t5-large",
+    "facebook/bart-large-cnn",
+    "google/pegasus-arxiv",
+    "google/pegasus-pubmed",
+    "google/pegasus-multi_news"
+]
+if model_choice in large_models:
+    st.sidebar.warning(
+        "⚠️ Large models may require more memory than available on free Streamlit Cloud or small servers. "
+        "If the app crashes or restarts, try a smaller model like 't5-small' or 'distilbart-cnn-12-6'."
+    )
+
 st.sidebar.markdown("---")
 
 st.sidebar.markdown("### 📋 Enhanced Features")
